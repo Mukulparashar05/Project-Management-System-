@@ -25,6 +25,8 @@ export function requiredUuid(label) {
 // Calendar date in YYYY-MM-DD form; Zod's ISO date check also rejects impossible days like 2026-02-30.
 export const dateOnly = z.iso.date({ error: 'Must be a valid date in YYYY-MM-DD format' });
 
+export const optionalDate = dateOnly.nullable().optional();
+
 export function requiredName(label, maxLength) {
   return z
     .string({ error: `${label} is required` })
@@ -41,11 +43,17 @@ export const optionalDescription = z
   .optional()
   .transform((value) => (value === '' ? null : value));
 
+export function enumField(values, label) {
+  return z.enum(values, { error: `${label} must be one of ${Object.values(values).join(', ')}` });
+}
+
 export function isDateRangeValid(startDate, endDate) {
   // ISO dates compare correctly as strings.
   return !startDate || !endDate || startDate <= endDate;
 }
 
-export function atLeastOneField(value) {
-  return Object.keys(value).length > 0;
+export const DATE_RANGE_ERROR = 'End date must be on or after the start date';
+
+export function hasAnyField(value) {
+  return Object.values(value).some((field) => field !== undefined);
 }
