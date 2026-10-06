@@ -3,7 +3,7 @@ import { AppError } from '../utils/AppError.js';
 function formatIssues(issues) {
   return issues.map((issue) => {
     if (issue.code === 'unrecognized_keys') {
-      return { field: issue.keys.join(', '), message: `Unknown field(s): ${issue.keys.join(', ')}` };
+      return { field: issue.keys.join(', '), message: `Field not allowed: ${issue.keys.join(', ')}` };
     }
     return { field: issue.path.join('.') || 'body', message: issue.message };
   });
