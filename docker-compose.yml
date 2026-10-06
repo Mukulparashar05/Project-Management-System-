@@ -1,0 +1,24 @@
+# Local development database. Credentials below are throwaway local defaults;
+# override them with environment variables if you expose this container anywhere.
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: orbit-pms-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-orbit_pms}
+    ports:
+      # Host port 5433 avoids clashing with any PostgreSQL already running on 5432.
+      - '${POSTGRES_PORT:-5433}:5432'
+    volumes:
+      - orbit-pms-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-orbit_pms}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  orbit-pms-data:
