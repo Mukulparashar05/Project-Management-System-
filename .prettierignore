@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+coverage
+package-lock.json
+backend/prisma/migrations
+mobile/.expo
+mobile/android
+mobile/ios
+web/playwright-report
+web/test-results
+docs/*.png
