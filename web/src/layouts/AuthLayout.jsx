@@ -39,7 +39,7 @@ export default function AuthLayout({ title, highlight, description, children }) 
           )}
 
           <div className="flex flex-1 items-center py-10">
-            <motion.div className="w-full max-w-[26rem]" initial="hidden" animate="visible" variants={reveal}>
+            <motion.div className="w-full max-w-[34rem]" initial="hidden" animate="visible" variants={reveal}>
               <motion.h1
                 variants={revealItem}
                 className="text-[2.6rem] leading-[1.02] font-semibold tracking-[-0.035em] text-zinc-50 sm:text-5xl xl:text-[3.6rem]"
@@ -50,10 +50,10 @@ export default function AuthLayout({ title, highlight, description, children }) 
                   {highlight}
                 </span>
               </motion.h1>
-              <motion.p variants={revealItem} className="mt-5 text-base leading-relaxed text-zinc-400">
+              <motion.p variants={revealItem} className="mt-5 max-w-[26rem] text-base leading-relaxed text-zinc-400">
                 {description}
               </motion.p>
-              <motion.div variants={revealItem} className="mt-9">
+              <motion.div variants={revealItem} className="mt-9 max-w-[26rem]">
                 {children}
               </motion.div>
             </motion.div>

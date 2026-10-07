@@ -29,7 +29,7 @@ function ProgressArc({ cx, cy, radius, progress }) {
 
 export function SceneFallback() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center">
+    <div className="absolute inset-0 flex items-center justify-center" data-testid="scene-fallback">
       <svg viewBox="0 0 600 420" className="h-full max-h-[34rem] w-full max-w-3xl" aria-hidden="true">
         <defs>
           <linearGradient id="fallback-block" x1="0" y1="0" x2="0" y2="1">

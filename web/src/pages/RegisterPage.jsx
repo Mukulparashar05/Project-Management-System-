@@ -14,7 +14,7 @@ const EMPTY_FORM = { fullName: '', email: '', password: '', confirmPassword: '' 
 
 function PasswordChecklist({ password }) {
   return (
-    <ul className="grid gap-1.5 text-xs sm:grid-cols-3" aria-label="Password requirements">
+    <ul className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs" aria-label="Password requirements">
       {PASSWORD_RULES.map((rule) => {
         const met = rule.test(password);
         return (

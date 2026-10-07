@@ -21,7 +21,7 @@ export default [
     },
   },
   {
-    files: ['*.config.js', 'e2e/**/*.js'],
+    files: ['*.config.js', 'e2e/**/*.js', 'scripts/**/*.js'],
     languageOptions: { globals: { ...globals.node } },
   },
 ];

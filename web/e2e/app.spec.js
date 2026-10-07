@@ -251,6 +251,16 @@ test.describe('projects and tasks', () => {
   });
 });
 
+test.describe('3D hero visual', () => {
+  test('renders the WebGL scene beside a fully usable login form', async ({ page, request }) => {
+    const user = await registerViaApi(request);
+    await page.goto('/login');
+    await expect(page.locator('aside canvas')).toBeVisible();
+    await expect(page.getByTestId('scene-fallback')).toHaveCount(0);
+    await loginViaUi(page, user);
+  });
+});
+
 test.describe('small screens', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 

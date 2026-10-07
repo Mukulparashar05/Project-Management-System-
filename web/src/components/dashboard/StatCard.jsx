@@ -26,12 +26,13 @@ export function StatCard({ label, value, hint, icon: Icon, tone = 'indigo', inde
         aria-hidden="true"
       />
       <div className="relative flex items-start justify-between gap-3">
-        <p className="text-sm text-zinc-400">{label}</p>
+        {/* Room for two lines keeps the numbers aligned when a label wraps. */}
+        <p className="min-h-10 text-sm leading-5 text-zinc-400">{label}</p>
         <span className={`flex size-8 items-center justify-center rounded-lg ring-1 ${styles.icon}`}>
           <Icon className="size-4" aria-hidden="true" />
         </span>
       </div>
-      <p className="relative mt-5 text-[2rem] leading-none font-semibold tracking-tight text-zinc-50">
+      <p className="relative mt-3 text-[2rem] leading-none font-semibold tracking-tight text-zinc-50">
         <AnimatedNumber value={value} />
       </p>
       {hint && <p className="relative mt-2 text-xs text-zinc-500">{hint}</p>}

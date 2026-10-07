@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FolderKanban, LayoutDashboard, LogOut, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router';
 import { Logo } from '../components/brand/Logo.jsx';
 import { IconButton } from '../components/ui/Button.jsx';
+import { Spinner } from '../components/ui/Feedback.jsx';
 import { useAuth } from '../hooks/useAuth.js';
 import { useToast } from '../hooks/useToast.js';
 
@@ -137,7 +138,9 @@ export default function AppLayout() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Outlet />
+            <Suspense fallback={<Spinner label="Loading page" className="py-24" />}>
+              <Outlet />
+            </Suspense>
           </motion.div>
         </div>
       </main>
