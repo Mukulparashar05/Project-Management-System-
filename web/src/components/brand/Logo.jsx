@@ -18,6 +18,7 @@ export function LogoMark({ className = 'size-8' }) {
         cy="32"
         rx="22"
         ry="9"
+        fill="none"
         stroke={`url(#${gradientId})`}
         strokeWidth="3"
         transform="rotate(-28 32 32)"
