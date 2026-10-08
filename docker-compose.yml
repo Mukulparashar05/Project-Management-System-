@@ -1,5 +1,6 @@
-# Local development database. Credentials below are throwaway local defaults;
-# override them with environment variables if you expose this container anywhere.
+# Local PostgreSQL for development:            docker compose up -d
+# PostgreSQL + the API in a production image:  JWT_SECRET=$(openssl rand -hex 32) docker compose --profile full up --build
+# The database credentials are throwaway local defaults; override them via environment variables.
 services:
   db:
     image: postgres:17-alpine
@@ -19,6 +20,21 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+
+  api:
+    profiles: ['full']
+    build: ./backend
+    container_name: orbit-pms-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-orbit_pms}?schema=public
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET, e.g. JWT_SECRET=$(openssl rand -hex 32)}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173}
+    ports:
+      - '${API_PORT:-4000}:4000'
 
 volumes:
   orbit-pms-data:
